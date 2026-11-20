@@ -11,6 +11,8 @@
   "contactEmail": "invisibubble.app@gmail.com",
   "playUrl": "https://play.google.com/store/apps/details?id=com.nofaapplications.invisibubble",
   "accentColor": "#E99C46",
+  "accentStrongColor": "#E99C46",
+  "onAccentColor": "#17120B",
   "icon": "icon.png",
   "iconSmall": "icon-128.png",
   "lastUpdated": "2026-11-20",

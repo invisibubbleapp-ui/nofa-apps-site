@@ -1,5 +1,10 @@
 /* Nofa Applications shared styles. Dark theme, mobile first.
-   Each app page sets its own accent with one variable: --accent. */
+   Colours: developer-level pages use the Nofa brand accent. App pages (and articles
+   about an app) override --accent, --accent-strong and --on-accent-strong on <body>,
+   set from that app's app.json. The header and footer always use the Nofa accent.
+   --accent         links, hover, focus rings, thin borders (must pass 4.5:1 on --bg)
+   --accent-strong  buttons and filled highlights
+   --on-accent-strong  text on --accent-strong (must pass 4.5:1) */
 
 @font-face {
   font-family: "Inter";
@@ -10,14 +15,18 @@
 }
 
 :root {
-  --accent: #E99C46;
+  --brand-accent: #8B7CFF;
+  --brand-accent-strong: #5B4BFF;
+  --on-brand-strong: #FFFFFF;
+  --accent: var(--brand-accent);
+  --accent-strong: var(--brand-accent-strong);
+  --on-accent-strong: var(--on-brand-strong);
   --bg: #121317;
   --surface: #1A1C21;
   --surface-2: #22252B;
   --border: #30333B;
   --text: #EEEAE0;
   --muted: #B5B0A5;
-  --on-accent: #17120B;
   --radius: 14px;
   --measure: 44rem;
   --wide: 66rem;
@@ -59,12 +68,18 @@ code {
 
 .skip {
   position: absolute; left: 16px; top: -100px;
-  background: var(--accent); color: var(--on-accent);
+  background: var(--accent-strong); color: var(--on-accent-strong);
   padding: 8px 14px; border-radius: 8px; font-weight: 600; z-index: 10;
 }
 .skip:focus { top: 12px; }
 
 /* Header */
+/* Header, footer and skip link are developer-level: always the Nofa accent. */
+.site-header, .site-footer, .skip {
+  --accent: var(--brand-accent);
+  --accent-strong: var(--brand-accent-strong);
+  --on-accent-strong: var(--on-brand-strong);
+}
 .site-header { border-bottom: 1px solid var(--border); }
 .header-inner {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
@@ -74,11 +89,7 @@ code {
   display: inline-flex; align-items: center; gap: 10px;
   color: var(--text); text-decoration: none; font-weight: 700; letter-spacing: -0.01em;
 }
-.brand-mark {
-  width: 22px; height: 22px; border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #fff 0 12%, transparent 13%), radial-gradient(circle at 50% 50%, #d9d6cf, #6f6d6a 75%);
-  box-shadow: 0 0 0 2px var(--bg), 0 0 0 3.5px var(--accent);
-}
+.brand-mark { width: 32px; height: 32px; flex: none; }
 .site-nav ul { display: flex; flex-wrap: wrap; gap: 4px 18px; list-style: none; margin: 0; padding: 0; }
 .site-nav a { color: var(--muted); text-decoration: none; font-size: 0.95rem; padding: 6px 0; display: inline-block; }
 .site-nav a:hover, .site-nav a[aria-current] { color: var(--text); }
@@ -98,7 +109,7 @@ code {
   color: var(--muted); text-decoration: none; font-size: 0.875rem; line-height: 1.4;
 }
 .subnav a:hover { color: var(--text); border-color: var(--muted); }
-.subnav a[aria-current] { color: var(--on-accent); background: var(--accent); border-color: var(--accent); font-weight: 600; }
+.subnav a[aria-current] { color: var(--on-accent-strong); background: var(--accent-strong); border-color: var(--accent-strong); font-weight: 600; }
 
 /* Main content */
 main { padding-bottom: 56px; }
@@ -136,7 +147,7 @@ tbody th { font-weight: 600; color: var(--text); }
 /* Call to action */
 .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin: 1.4em 0 0.4em; }
 .btn {
-  display: inline-block; background: var(--accent); color: var(--on-accent);
+  display: inline-block; background: var(--accent-strong); color: var(--on-accent-strong);
   font-weight: 650; text-decoration: none; padding: 12px 20px; border-radius: 999px;
 }
 .btn:hover { filter: brightness(1.08); }
@@ -159,7 +170,7 @@ tbody th { font-weight: 600; color: var(--text); }
 .box-steps li::before {
   content: counter(step); position: absolute; left: 16px; top: 15px;
   width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
-  background: var(--accent); color: var(--on-accent); font-weight: 700; font-size: 0.95rem;
+  background: var(--accent-strong); color: var(--on-accent-strong); font-weight: 700; font-size: 0.95rem;
 }
 
 /* App cards and lists */
@@ -200,7 +211,8 @@ tbody th { font-weight: 600; color: var(--text); }
 .footer-col ul { list-style: none; margin: 0; padding: 0; }
 .footer-col li { margin: 4px 0; }
 .site-footer a { color: var(--muted); }
-.site-footer a:hover { color: var(--text); }
+.site-footer a:hover { color: var(--accent); }
+.footer-contact a { color: var(--accent); }
 .footer-contact { margin: 28px 0 6px; }
 .footer-note { margin: 0; font-size: 0.8rem; }
 

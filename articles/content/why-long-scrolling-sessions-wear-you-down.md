@@ -3,7 +3,7 @@ title: Why Long Scrolling Sessions Wear You Down (Short Version)
 slug: why-long-scrolling-sessions-wear-you-down
 description: "A short summary of what research says about long scrolling sessions: sleep, mood, eyes, neck and body, whether it is a disorder, and what helps."
 datePublished: 2026-11-18
-dateModified: 2026-11-20
+dateModified: 2026-11-21
 author: Nofa Applications
 relatedApp: invisibubble
 ---
@@ -27,8 +27,8 @@ Scrolling for hours is rarely a decision. The feed has no end, so stopping takes
 
 Apps like Invisibubble: Scroll Timer are designed around the first two ideas: you set a timer before you scroll, and a screen takes over when time is up. It is an Android app, not a treatment. It is free to install, and new users currently get their first 24 hours free. Link: https://play.google.com/store/apps/details?id=com.nofaapplications.invisibubble
 
-*Disclosure: Invisibubble is published by the author of this post.*
+*Disclosure: Invisibubble is published by Nofa Applications, which also published this post.*
 
 Full article with sources: https://nofa-apps.store/articles/what-scrolling-does-to-sleep-mood-focus-and-body/
 
-*Drafted with AI assistance and reviewed by the author.*
+*Drafted with AI assistance, and reviewed by Nofa Applications.*

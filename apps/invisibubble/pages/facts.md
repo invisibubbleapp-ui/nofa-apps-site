@@ -4,10 +4,10 @@ h1: "Invisibubble: Scroll Timer fact sheet"
 description: "Official facts about Invisibubble: Scroll Timer in one table: developer, platform, package name, features, prices, permission and contact."
 navLabel: Fact sheet
 order: 8
-dateModified: 2026-11-20
+dateModified: 2026-11-21
 ---
 
-This page lists the official facts about {{app.name}} in one table. It is published by the developer, {{app.developer}}, and every other page on this site uses the same facts.
+This page lists the official facts about {{app.name}} in one table. It is published by {{app.developer}}, and every other page on this site uses the same facts.
 
 {{> factsTable}}
 

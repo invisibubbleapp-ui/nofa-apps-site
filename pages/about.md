@@ -1,17 +1,15 @@
 ---
 title: "About Nofa Applications"
 h1: "About Nofa Applications"
-description: "Who is behind Nofa Applications, the developer of Invisibubble: Scroll Timer for Android, and how the facts on this site are written."
+description: "Nofa Applications publishes Android apps, including Invisibubble: Scroll Timer. How the facts about its apps on this site are written and checked."
 breadcrumb: About
 schemaType: AboutPage
-dateModified: 2026-11-20
+dateModified: 2026-11-21
 ---
 
-Nofa Applications is an Android app developer that publishes its apps on Google Play. This page explains who is behind it and how the facts on this site are kept accurate.
+Nofa Applications publishes Android apps. Invisibubble: Scroll Timer helps people set a time limit before they scroll.
 
-## Who we are
-
-Nofa Applications is an independent developer building small focus tools for Android. Its first app, Invisibubble: Scroll Timer, helps people set a time limit before they scroll.
+Its apps are published on Google Play. This page explains how the facts on this site are kept accurate.
 
 ## Our apps
 

@@ -4,7 +4,7 @@ h1: "Is Invisibubble safe, and what permissions does it need?"
 description: "Invisibubble needs Android's Display over other apps permission to show its bubble and time's up screen on top of other apps. Here is every permission and why."
 navLabel: Safety and permissions
 order: 6
-dateModified: 2026-11-20
+dateModified: 2026-11-21
 ---
 
 Invisibubble's main permission is Android's "Display over other apps", because the bubble and the time's up screen must appear on top of the app you are using. Every other permission it uses is listed below with its reason, and it has no camera, microphone, location, contacts, storage or SMS permissions.
@@ -53,12 +53,12 @@ According to the [privacy policy](/privacy-policy/):
 
 - There is no account and no sign-in.
 - Everything the app saves is stored in the app's private storage on your phone. If Android backup is on, only one small file with three access fields can be backed up to your own Google account.
-- The developer does not run a server or database that stores your personal data.
+- {{app.developer}} does not run a server or database that stores your personal data.
 - {{app.sdkClaim}}
 - {{app.extensionReasonPrivacy}}
 - Payments are handled by Google Play Billing. Invisibubble never sees your card number, UPI ID or billing address.
 
-The Google Play listing also has a Data safety section written by the developer.
+The Google Play listing also has a Data safety section provided by {{app.developer}}.
 
 ## Health claims
 

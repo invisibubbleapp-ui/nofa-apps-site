@@ -39,7 +39,9 @@ This is the **only** place the app's facts are typed. Pages pull them in with pl
 | `packageName` | Google Play package name |
 | `contactEmail` | Support email |
 | `playUrl` | Must be `https://play.google.com/store/apps/details?id=<packageName>` |
-| `accentColor` | The app's accent colour. Sets the CSS variable `--accent` on its pages |
+| `accentColor` | The app's accent for links and hover. Sets `--accent` on its pages and on articles about it. Must reach 4.5:1 contrast on `#121317` |
+| `accentStrongColor` | Fill colour for buttons and highlights (`--accent-strong`). Often the same as `accentColor` |
+| `onAccentColor` | Text colour on `accentStrongColor` (`--on-accent-strong`). Must reach 4.5:1 contrast on it |
 | `icon`, `iconSmall` | File names of the icons in the app folder |
 | `lastUpdated` | `YYYY-MM-DD`. Change it whenever a fact changes |
 | `oneLiner` | One or two sentences for app cards |

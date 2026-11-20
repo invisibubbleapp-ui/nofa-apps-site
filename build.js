@@ -136,6 +136,7 @@ for (const dir of fs.existsSync(path.join(ROOT, 'apps')) ? fs.readdirSync(path.j
   app.url = site.url + app.path;
   app.iconUrl = app.path + app.icon;
   app.iconSmallUrl = app.path + (app.iconSmall || app.icon);
+  app.iconSize = fs.readFileSync(path.join(ROOT, 'apps', dir, app.icon)).readUInt32BE(16);
   app.offerByKey = Object.fromEntries(app.offers.map((o) => [o.key, o]));
   app.freeFirstDay = app.freeFirstDay === true;
   // Values that change when the free first day is live. Ignored while the flag is off.
@@ -255,6 +256,7 @@ const orgNode = () => ({
   name: site.name,
   url: site.url + '/',
   email: site.email,
+  logo: site.url + site.logo,
   ...(site.sameAs && site.sameAs.length ? { sameAs: site.sameAs } : {}),
 });
 
@@ -412,16 +414,25 @@ function renderPage(page) {
   if (faq.length) graph.push(faqNode(url, faq));
   const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph }, null, 2).replace(/</g, '\\u003c');
 
-  const ogImage = site.url + (page.app ? page.app.iconUrl : site.defaultOgImage);
+  // App pages, and articles about an app, use that app's icon and accent.
+  // Every other page uses the Nofa Applications brand image and accent.
+  const themeApp = page.app || page.themeApp || null;
+  const og = themeApp
+    ? { src: site.url + themeApp.iconUrl, width: themeApp.iconSize, height: themeApp.iconSize, alt: themeApp.shortName + ' app icon', card: 'summary' }
+    : { src: site.url + site.defaultOgImage.src, width: site.defaultOgImage.width, height: site.defaultOgImage.height, alt: site.defaultOgImage.alt, card: 'summary_large_image' };
   const head = [
     '<meta property="og:type" content="' + (page.ogType || 'website') + '">',
     '<meta property="og:site_name" content="' + attr(site.name) + '">',
     '<meta property="og:title" content="' + attr(page.ogTitle || page.title) + '">',
     '<meta property="og:description" content="' + attr(page.description) + '">',
     '<meta property="og:url" content="' + attr(url) + '">',
-    '<meta property="og:image" content="' + attr(ogImage) + '">',
-    '<meta property="og:image:alt" content="' + attr(page.app ? page.app.shortName + ' app icon' : site.defaultOgImageAlt) + '">',
-    '<meta name="twitter:card" content="summary">',
+    '<meta property="og:image" content="' + attr(og.src) + '">',
+    '<meta property="og:image:width" content="' + og.width + '">',
+    '<meta property="og:image:height" content="' + og.height + '">',
+    '<meta property="og:image:alt" content="' + attr(og.alt) + '">',
+    '<meta name="twitter:card" content="' + og.card + '">',
+    '<meta name="twitter:image" content="' + attr(og.src) + '">',
+    '<meta name="twitter:image:alt" content="' + attr(og.alt) + '">',
   ];
   if (page.ogType === 'article') {
     head.push('<meta property="article:published_time" content="' + page.datePublished + '">');
@@ -447,11 +458,12 @@ function renderPage(page) {
     canonical: page.noindex ? '' : '<link rel="canonical" href="' + attr(url) + '">',
     robots: page.noindex ? '<meta name="robots" content="noindex">' : '',
     og: page.noindex ? '' : head.join('\n'),
-    favicon: page.app ? '<link rel="icon" type="image/png" href="' + attr(page.app.iconSmallUrl) + '">' : '<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">',
     themeColor: site.themeColor,
     cssHash,
     jsonld,
-    bodyAttrs: page.app && page.app.accentColor ? ' class="app-' + page.app.slug + '" style="--accent: ' + attr(page.app.accentColor) + '"' : '',
+    bodyAttrs: themeApp && themeApp.accentColor
+      ? ' class="app-' + themeApp.slug + '" style="--accent: ' + attr(themeApp.accentColor) + '; --accent-strong: ' + attr(themeApp.accentStrongColor || themeApp.accentColor) + '; --on-accent-strong: ' + attr(themeApp.onAccentColor || '#17120B') + '"'
+      : '',
     header: tpl.header.replace('{{siteName}}', escapeHtml(site.name)).replace('{{nav}}', navHtml(page.path)),
     main,
     footer: tpl.footer
@@ -603,6 +615,7 @@ for (const a of articles) {
     dateModified: a.data.dateModified,
     datePublished: a.data.datePublished,
     ogType: 'article',
+    themeApp: app,
     metaHtml: '<p class="byline">By ' + (a.data.authorUrl ? '<a href="' + attr(a.data.authorUrl) + '">' + escapeHtml(a.data.author) + '</a>' : escapeHtml(a.data.author)) +
       '. Published ' + timeTag(a.data.datePublished) + '.</p><p class="updated">Last updated ' + timeTag(a.data.dateModified) + (updated ? '' : '') + '</p>',
     beforeBody: toc,
@@ -618,7 +631,7 @@ for (const a of articles) {
       author: authorNode,
       publisher: { '@id': ORG_ID },
       mainEntityOfPage: { '@id': url + '#webpage' },
-      image: site.url + (app ? app.iconUrl : site.defaultOgImage),
+      image: site.url + (app ? app.iconUrl : site.defaultOgImage.src),
       inLanguage: site.language,
       ...(app ? { about: appRef(app) } : {}),
     }],
@@ -668,7 +681,7 @@ write('robots.txt', '# robots.txt for ' + site.url + '\n# Every crawler may read
     for (const a of articles) L.push('- [' + a.data.title + '](' + site.url + a.path + '): ' + a.data.description);
     L.push('');
   }
-  L.push('## About the developer', '');
+  L.push('## About ' + site.name, '');
   for (const p of devPages.filter((x) => ['about', 'contact', 'privacy-policy'].includes(x.slug))) L.push('- [' + p.data.h1 + '](' + site.url + p.path + '): ' + p.data.description);
   L.push('');
   write('llms.txt', L.join('\n'));

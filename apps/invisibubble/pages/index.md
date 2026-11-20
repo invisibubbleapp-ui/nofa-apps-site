@@ -4,7 +4,7 @@ h1: "Invisibubble: Scroll Timer"
 description: "Invisibubble: Scroll Timer is an Android app with a floating bubble. Set a scroll timer before you scroll; a full-screen takeover shows when time is up."
 navLabel: Overview
 order: 1
-dateModified: 2026-11-20
+dateModified: 2026-11-21
 ---
 
 {{app.name}} is an Android app that keeps a small floating glass bubble at the edge of your screen, over other apps. You set a scroll timer before you start scrolling, and when time is up a full-screen takeover asks if you are done or want extra time.
@@ -55,4 +55,4 @@ No. Invisibubble is available for Android only.
 
 ### Who makes Invisibubble?
 
-Invisibubble is made by {{app.developer}}. You can contact the developer at {{app.contactEmail}}.
+Invisibubble is made by {{app.developer}}. You can contact {{app.developer}} at {{app.contactEmail}}.

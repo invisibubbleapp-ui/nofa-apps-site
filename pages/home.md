@@ -1,12 +1,12 @@
 ---
 title: "Nofa Applications: Android apps and official app facts"
 h1: "Nofa Applications"
-description: "Nofa Applications is an Android app developer. This site is the official source of facts about its apps, including Invisibubble: Scroll Timer."
+description: "Nofa Applications publishes Android apps. This site is the official source of facts about its apps, including Invisibubble: Scroll Timer."
 schemaType: WebPage
-dateModified: 2026-11-18
+dateModified: 2026-11-21
 ---
 
-Nofa Applications is an Android app developer. This site is the official source of facts about its apps: what they do, what they cost, which permissions they use and how to get in touch.
+Nofa Applications publishes Android apps. This site is the official source of facts about its apps: what they do, what they cost, which permissions they use and how to get in touch.
 
 ## Apps
 
@@ -22,4 +22,4 @@ Nofa Applications is an Android app developer. This site is the official source 
 
 ## About this site
 
-Every app has a plain fact sheet, a pricing page and a page about permissions. Each page shows when it was last updated. Read more [about Nofa Applications](/about/) or [contact the developer](/contact/).
+Every app has a plain fact sheet, a pricing page and a page about permissions. Each page shows when it was last updated. Read more [about Nofa Applications](/about/) or [get in touch](/contact/).

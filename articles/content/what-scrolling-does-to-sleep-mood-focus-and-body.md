@@ -3,7 +3,7 @@ title: What Hours of Scrolling Can Do to Your Sleep, Mood, Focus and Body
 slug: what-scrolling-does-to-sleep-mood-focus-and-body
 description: "What research says about long scrolling sessions and doomscrolling: sleep, mood, eye strain, posture, whether it is a disorder, and what helps."
 datePublished: 2026-11-18
-dateModified: 2026-11-20
+dateModified: 2026-11-21
 author: Nofa Applications
 relatedApp: invisibubble
 tags: doomscrolling, mindless scrolling, screen time, digital wellbeing, sleep, focus
@@ -111,7 +111,7 @@ Tools like this are aids for noticing your own limit. They are not treatments, a
 
 Google Play: https://play.google.com/store/apps/details?id=com.nofaapplications.invisibubble
 
-*Disclosure: Invisibubble is published by the author of this article.*
+*Disclosure: Invisibubble is published by Nofa Applications, which also published this article.*
 
 ## Frequently asked questions
 
@@ -148,4 +148,4 @@ Decide on a limit before you open the app, and use something that stops you when
 - Digital self-awareness and wellbeing, discussion of tool effects (arXiv): https://arxiv.org/pdf/2509.21860
 - Scrolling in the Deep: contextual influences on interventions during infinite scrolling (arXiv, cites "The Loop and Reasons to Break It", ACM 2023): https://arxiv.org/pdf/2501.11814
 
-*Drafted with AI assistance and reviewed and published by the author.*
+*Drafted with AI assistance, and reviewed and published by Nofa Applications.*
