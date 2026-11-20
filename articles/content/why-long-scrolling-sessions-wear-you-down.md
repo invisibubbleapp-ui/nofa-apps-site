@@ -1,5 +1,5 @@
 ---
-title: Why Long Scrolling Sessions Wear You Down (Short Version)
+title: Why Long Scrolling Sessions Wear You Down
 slug: why-long-scrolling-sessions-wear-you-down
 description: "A short summary of what research says about long scrolling sessions: sleep, mood, eyes, neck and body, whether it is a disorder, and what helps."
 datePublished: 2026-11-18
@@ -7,7 +7,7 @@ dateModified: 2026-11-21
 author: Nofa Applications
 relatedApp: invisibubble
 ---
-# Why Long Scrolling Sessions Wear You Down (Short Version)
+# Why Long Scrolling Sessions Wear You Down
 
 *General information, not medical advice. For problems with sleep, mood or daily life, talk to a doctor or a mental-health professional.*
 
