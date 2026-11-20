@@ -1,0 +1,21 @@
+# Build output (GitHub Actions rebuilds it on every push)
+dist/
+
+# Dependencies
+node_modules/
+
+# Local scratch, logs and editor files
+*.log
+*.tmp
+*.bak
+.env
+.env.*
+scratch/
+tmp/
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini

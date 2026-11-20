@@ -1,0 +1,7 @@
+# Keep text files with LF line endings everywhere; never touch binary files.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.webp binary
+*.ico binary
+*.woff2 binary

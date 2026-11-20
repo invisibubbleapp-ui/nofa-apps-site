@@ -1,0 +1,27 @@
+{
+  "name": "Nofa Applications",
+  "domain": "nofa-apps.store",
+  "url": "https://nofa-apps.store",
+  "email": "invisibubble.app@gmail.com",
+  "language": "en",
+  "themeColor": "#121317",
+  "defaultOgImage": "/apps/invisibubble/icon.png",
+  "defaultOgImageAlt": "Nofa Applications",
+  "sameAs": [],
+  "llmsSummary": "Nofa Applications is an Android app developer. This site is the official source of facts about its apps: what they do, what they cost, which permissions they use and how to contact the developer.",
+  "footerNote": "Google Play is a trademark of Google LLC. YouTube and Instagram are trademarks of their owners. Nofa Applications is not affiliated with Google, YouTube or Instagram.",
+  "nav": [
+    { "label": "Apps", "path": "/apps/" },
+    { "label": "Articles", "path": "/articles/" },
+    { "label": "About", "path": "/about/" },
+    { "label": "Contact", "path": "/contact/" }
+  ],
+  "footerLinks": [
+    { "label": "Home", "path": "/" },
+    { "label": "Apps", "path": "/apps/" },
+    { "label": "Articles", "path": "/articles/" },
+    { "label": "About", "path": "/about/" },
+    { "label": "Contact", "path": "/contact/" },
+    { "label": "Privacy policy", "path": "/privacy-policy/" }
+  ]
+}

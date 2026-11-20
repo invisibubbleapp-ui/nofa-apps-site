@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+{{robots}}
+{{canonical}}
+{{og}}
+<meta name="theme-color" content="{{themeColor}}">
+{{favicon}}
+<link rel="preload" href="/assets/fonts/inter-var-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/styles.css?v={{cssHash}}">
+<script type="application/ld+json">
+{{jsonld}}
+</script>
+</head>
+<body{{bodyAttrs}}>
+{{header}}
+<main id="main" class="wrap">
+{{main}}
+</main>
+{{footer}}
+</body>
+</html>

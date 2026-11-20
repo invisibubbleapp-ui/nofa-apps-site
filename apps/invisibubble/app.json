@@ -1,0 +1,240 @@
+{
+  "slug": "invisibubble",
+  "order": 1,
+  "name": "Invisibubble: Scroll Timer",
+  "shortName": "Invisibubble",
+  "developer": "Nofa Applications",
+  "platform": "Android only",
+  "operatingSystem": "Android",
+  "applicationCategory": "UtilitiesApplication",
+  "packageName": "com.nofaapplications.invisibubble",
+  "contactEmail": "invisibubble.app@gmail.com",
+  "playUrl": "https://play.google.com/store/apps/details?id=com.nofaapplications.invisibubble",
+  "accentColor": "#E99C46",
+  "icon": "icon.png",
+  "iconSmall": "icon-128.png",
+  "lastUpdated": "2026-11-20",
+  "oneLiner": "A floating bubble timer for Android. Set your minutes before you start scrolling, and a full-screen takeover tells you when time is up.",
+  "summary": "Invisibubble: Scroll Timer is an Android app that keeps a small floating glass bubble at the edge of your screen, over other apps. You set a scroll timer before you start scrolling, and when time is up a full-screen takeover asks if you are done or want extra time.",
+  "timerOptions": "5, 10, 15, 30 minutes or a custom time",
+  "timeUp": "A full-screen takeover asks \"I'm done\" or lets you add extra time.",
+  "extensionRule": "The second extension needs a typed reason.",
+  "reminders": "Same-day reminders show only as a coloured ring on the bubble, while the bubble is on. There is no reminder notification.",
+  "hideBubble": "A \"Hide bubble\" option hides the bubble for a chosen time.",
+  "offers": [
+    {
+      "key": "lifetime",
+      "name": "Lifetime unlock",
+      "label": "lifetime unlock (one-time)",
+      "description": "One-time payment that unlocks the app for life.",
+      "price": "100",
+      "currency": "INR",
+      "display": "Rs 100"
+    },
+    {
+      "key": "pass",
+      "name": "24-hour pass",
+      "label": "for a 24-hour pass (can be bought again)",
+      "description": "Unlocks the app for 24 hours. It can be bought again.",
+      "price": "5",
+      "currency": "INR",
+      "display": "Rs 5"
+    }
+  ],
+  "freeFirstDay": true,
+  "freeFirstDayText": "New users currently get their first 24 hours free. No code is needed.",
+  "facts": [
+    {
+      "label": "App name",
+      "value": "{{app.name}}"
+    },
+    {
+      "label": "Developer",
+      "value": "{{app.developer}}"
+    },
+    {
+      "label": "Platform",
+      "value": "{{app.platform}}"
+    },
+    {
+      "label": "Package name",
+      "value": "{{app.packageName}}"
+    },
+    {
+      "label": "Google Play link",
+      "value": "{{app.playUrl}}"
+    },
+    {
+      "label": "Contact",
+      "value": "{{app.contactEmail}}"
+    },
+    {
+      "label": "What it does",
+      "value": "A small floating glass bubble stays at the screen edge over other apps. You set a scroll timer before you start scrolling."
+    },
+    {
+      "label": "How to start a timer",
+      "value": "{{app.openTimer}}"
+    },
+    {
+      "label": "Timer options",
+      "value": "{{app.timerOptions}}"
+    },
+    {
+      "label": "When time is up",
+      "value": "{{app.timeUp}}"
+    },
+    {
+      "label": "Timer",
+      "value": "{{app.timerRuns}}"
+    },
+    {
+      "label": "Extra time",
+      "value": "{{app.extensionRule}}"
+    },
+    {
+      "label": "Reminders",
+      "value": "{{app.reminders}}"
+    },
+    {
+      "label": "Hide bubble",
+      "value": "{{app.hideBubble}}"
+    },
+    {
+      "label": "Download",
+      "value": "{{app.installPrice}}"
+    },
+    {
+      "label": "What needs access",
+      "value": "{{app.accessRule}}"
+    },
+    {
+      "label": "Lifetime price",
+      "value": "{{app.offerByKey.lifetime.display}} {{app.offerByKey.lifetime.label}}"
+    },
+    {
+      "label": "24-hour pass price",
+      "value": "{{app.offerByKey.pass.display}} {{app.offerByKey.pass.label}}"
+    },
+    {
+      "label": "Free first day",
+      "value": "{{app.freeFirstDayText}}",
+      "onlyIf": "app.freeFirstDay"
+    },
+    {
+      "label": "Notifications",
+      "value": "{{app.notificationsFact}}"
+    },
+    {
+      "label": "Permissions",
+      "value": "{{app.permissionSummary}}"
+    },
+    {
+      "label": "Not used",
+      "value": "{{app.noPermissions}}"
+    },
+    {
+      "label": "Payments",
+      "value": "Handled by Google Play Billing"
+    },
+    {
+      "label": "Account needed",
+      "value": "No. There is no account or sign-in."
+    },
+    {
+      "label": "Data",
+      "value": "App data is stored in private storage on the phone. {{app.sdkClaim}} See https://nofa-apps.store/privacy-policy/"
+    },
+    {
+      "label": "Extension reason",
+      "value": "{{app.extensionReasonPrivacy}}"
+    },
+    {
+      "label": "Affiliation",
+      "value": "Not affiliated with YouTube, Instagram, Google or any other brand"
+    },
+    {
+      "label": "Health claims",
+      "value": "None. Invisibubble is a timer, not a medical or health product."
+    }
+  ],
+  "permissions": [
+    {
+      "label": "Display over other apps",
+      "android": [
+        "SYSTEM_ALERT_WINDOW"
+      ],
+      "reason": "Lets the bubble float on your screen while you use other apps. It draws the bubble. It does not let Invisibubble see, read or record what happens inside other apps."
+    },
+    {
+      "label": "Run in the background",
+      "android": [
+        "FOREGROUND_SERVICE",
+        "FOREGROUND_SERVICE_SPECIAL_USE"
+      ],
+      "reason": "Keeps the bubble and a running timer active when the app is not in the foreground. Recent Android versions require the second permission for this. Android shows a visible notification while this is active."
+    },
+    {
+      "label": "Notifications",
+      "android": [
+        "POST_NOTIFICATIONS"
+      ],
+      "reason": "Used for the alert that a free day or 24-hour pass has ended, and for the ongoing notice Android shows while the bubble is on. We do not send marketing notifications."
+    },
+    {
+      "label": "Exact alarms",
+      "android": [
+        "SCHEDULE_EXACT_ALARM"
+      ],
+      "reason": "Used so the alert that a free day or 24-hour pass has ended arrives at the right time."
+    },
+    {
+      "label": "Restart handling",
+      "android": [
+        "RECEIVE_BOOT_COMPLETED"
+      ],
+      "reason": "Lets the app re-schedule the alert that tells you a free day or 24-hour pass has ended, so it still arrives after the phone restarts or the app updates. The bubble does not restart by itself after a restart."
+    },
+    {
+      "label": "Battery optimization request",
+      "android": [
+        "REQUEST_IGNORE_BATTERY_OPTIMIZATIONS"
+      ],
+      "reason": "Lets the app ask you to allow it to run without battery restrictions, so Android does not stop the bubble. You choose, and you can say no."
+    },
+    {
+      "label": "Keep awake",
+      "android": [
+        "WAKE_LOCK"
+      ],
+      "reason": "Declared by a bundled overlay library. The app does not keep your phone awake. Android may briefly wake the phone when the alert that a free day or 24-hour pass has ended goes off."
+    },
+    {
+      "label": "Google Play Billing",
+      "android": [
+        "com.android.vending.BILLING"
+      ],
+      "reason": "Lets you buy the 24-hour pass or the lifetime unlock, and shows their prices, through Google Play."
+    },
+    {
+      "label": "Internet and network state",
+      "android": [
+        "INTERNET",
+        "ACCESS_NETWORK_STATE"
+      ],
+      "reason": "Used only for the single request described under \"Network request\", and by Google Play Billing for purchases."
+    }
+  ],
+  "noPermissions": "Invisibubble has no camera, microphone, location, contacts, storage or SMS permissions.",
+  "extensionReasonPrivacy": "The reason you type for a second time extension is not saved or sent anywhere. It is checked once to make sure it is not empty, then cleared.",
+  "sdkClaim": "No analytics, crash-reporting, advertising or attribution SDKs.",
+  "timerRuns": "The scroll timer runs only while the bubble is on. When the countdown ends, the bubble shows the \"Time's up\" screen. There is no notification when a timer finishes.",
+  "notificationsFact": "Only two: the alert that a free day or 24-hour pass has ended, and the ongoing notice Android shows while the bubble is on.",
+  "installPrice": "Free to install",
+  "accessRule": "Invisibubble is free to install. Showing the floating bubble, and so the scroll timer, needs a 24-hour pass (Rs 5) or the lifetime unlock (Rs 100). Reminders and Settings open without paying.",
+  "openTimer": "Tap the bubble to open \"Quick actions\", then tap \"Scroll timer\".",
+  "tapVsDrag": "A tap is different from a drag. Dragging the bubble moves it to the nearest screen edge.",
+  "freeFirstDayOverrides": {
+    "accessRule": "Invisibubble is free to install. New users currently get their first 24 hours free, with no code needed. After that, showing the floating bubble, and so the scroll timer, needs a 24-hour pass (Rs 5, can be bought again) or the lifetime unlock (Rs 100, paid once). Reminders and Settings open without paying."
+  }
+}
