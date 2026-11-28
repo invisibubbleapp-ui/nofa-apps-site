@@ -22,8 +22,8 @@ The build checks the HTML structure, titles and descriptions, the single h1 per 
 | --- | --- |
 | `site.json` | Developer facts (name, URL, email), navigation, footer |
 | `apps/<slug>/app.json` | All facts for one app. The only place app facts are typed |
-| `apps/<slug>/pages/*.md` | The app's pages. `index.md` is the app home |
-| `pages/*.md` | Developer pages: home, apps, articles, about, contact, privacy policy, 404 |
+| `apps/<slug>/pages/*.md` | The app's pages. `index.md` is the app home. `privacy-policy.md` is the app's own privacy policy (required) |
+| `pages/*.md` | Developer pages: home, apps, articles, about, contact, privacy policies overview, 404 |
 | `articles/content/*.md` | Articles (Markdown with front matter) |
 | `incoming-articles/` | Drop new articles here, then run the import tool |
 | `templates/` | Shared layout, header and footer |
@@ -32,6 +32,8 @@ The build checks the HTML structure, titles and descriptions, the single h1 per 
 | `tools/` | Article import tool, local preview server |
 | `dist/` | The built site. Do not edit; it is rebuilt every time |
 | `docs/ADDING_AN_APP.md` | How to add an app or an article |
+
+Each app has its own privacy policy at `/apps/<slug>/privacy-policy/`. The root `/privacy-policy/` is a short overview that lists every app's policy, built from the app data. Its "How we treat data across our apps" section only shows statements that every app's `app.json` marks as true under `practices`.
 
 URLs never change once published. File names in `apps/<slug>/pages/` and the article `slug` decide the URLs, so do not rename them.
 
@@ -97,5 +99,5 @@ Check that both `https://nofa-apps.store/` and `https://www.nofa-apps.store/` op
 ### 5. After the site is live
 
 - Submit `https://nofa-apps.store/sitemap.xml` in Google Search Console and Bing Webmaster Tools.
-- Put `https://nofa-apps.store/apps/invisibubble/` as the website on the Play Store listing, and `https://nofa-apps.store/privacy-policy/` as the privacy policy URL once the real policy text is on that page.
+- Put `https://nofa-apps.store/apps/invisibubble/` as the website on the Play Store listing, and `https://nofa-apps.store/apps/invisibubble/privacy-policy/` as the privacy policy URL. Each future app uses its own `https://nofa-apps.store/apps/<slug>/privacy-policy/`.
 - Publish articles here first. Then post copies on Medium and other sites with a link back to the original article page.

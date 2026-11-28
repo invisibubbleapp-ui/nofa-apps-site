@@ -154,6 +154,8 @@ for (const dir of fs.existsSync(path.join(ROOT, 'apps')) ? fs.readdirSync(path.j
   }
   app.pages.sort((a, b) => a.data.order - b.data.order);
   if (!app.pages.find((p) => p.slug === 'index')) fail(pagesDir + ': missing index.md (the app home)');
+  if (!app.pages.find((p) => p.slug === 'privacy-policy')) fail(pagesDir + ': missing privacy-policy.md (every app needs its own privacy policy)');
+  app.policyPath = app.path + 'privacy-policy/';
   apps.push(app);
 }
 apps.sort((a, b) => a.order - b.order);
@@ -208,7 +210,7 @@ function appCards() {
   return '<ul class="cards">\n' + apps.map((a) => '<li class="card">' +
     '<img src="' + attr(a.iconSmallUrl) + '" alt="' + attr(a.shortName) + ' app icon" width="64" height="64">' +
     '<div><h3><a href="' + a.path + '">' + escapeHtml(a.name) + '</a></h3><p>' + escapeHtml(a.oneLiner) + '</p>' +
-    '<p class="card-meta">' + escapeHtml(a.platform) + ' · <a href="' + a.path + 'facts/">Fact sheet</a> · <a href="' + attr(a.playUrl) + '">Google Play</a></p></div></li>').join('\n') + '\n</ul>';
+    '<p class="card-meta">' + escapeHtml(a.platform) + ' · <a href="' + a.path + 'facts/">Fact sheet</a> · <a href="' + a.policyPath + '">Privacy policy</a> · <a href="' + attr(a.playUrl) + '">Google Play</a></p></div></li>').join('\n') + '\n</ul>';
 }
 
 function articleList(list, level = 3) {
@@ -230,9 +232,46 @@ const COMPONENTS = {
   latestArticles: () => articleList(articles.slice(0, 5)),
   appPages: (c) => appPageList(c.app, c.page.path),
   permissionsTable: (c) => permissionsTable(c.app),
+  policyPermissionsTable: (c) => policyPermissionsTable(c.app),
+  storedDataList: (c) => storedDataList(c.app),
+  appPolicyList: () => appPolicyList(),
+  sharedPractices: () => sharedPractices(),
 };
 
-/** Permission table from app.json "permissions". The same reasons must appear in the privacy policy. */
+/** Privacy policy version of the permission table: same labels, Android names and reasons as the safety page. */
+function policyPermissionsTable(app) {
+  const rows = app.permissions.map((p) => '<tr><th scope="row">' + escapeHtml(p.label) + ' (' + p.android.map((n) => '<code>' + escapeHtml(n) + '</code>').join(', ') + ')</th><td>' + escapeHtml(p.reason) + '</td></tr>');
+  return '<div class="table-wrap"><table>\n<thead><tr><th scope="col">Permission</th><th scope="col">What it is for</th></tr></thead>\n<tbody>\n' + rows.join('\n') + '\n</tbody>\n</table></div>';
+}
+
+/** "Data stored on your device" list from app.json "storedData". */
+function storedDataList(app) {
+  if (!app.storedData || !app.storedData.length) { fail('apps/' + app.slug + '/app.json: "storedData" is empty'); return ''; }
+  return '<ul>\n' + app.storedData.map((d) => '<li><strong>' + escapeHtml(d.label) + ':</strong> ' + escapeHtml(d.detail) + '</li>').join('\n') + '\n</ul>';
+}
+
+/** Links to every app's privacy policy, for the /privacy-policy/ overview. */
+function appPolicyList() {
+  return '<ul class="link-list">\n' + apps.map((a) => '<li><a href="' + a.policyPath + '">' + escapeHtml(a.name) + ' privacy policy</a></li>').join('\n') + '\n</ul>';
+}
+
+/**
+ * Statements that are true for every app, from each app.json "practices".
+ * A statement is shown only if every app sets it to true; if none qualify, nothing is shown.
+ */
+const PRACTICES = {
+  noAccount: 'None of our apps needs an account or sign-in.',
+  noTrackingSdks: 'None of our apps includes analytics, crash-reporting, advertising or attribution SDKs.',
+  noPersonalDataServer: 'We do not run a server or database that stores personal data from our apps.',
+  noDataSale: 'We do not sell or share your data.',
+};
+function sharedPractices() {
+  const lines = Object.entries(PRACTICES).filter(([k]) => apps.length && apps.every((a) => a.practices && a.practices[k] === true)).map(([, v]) => v);
+  if (!lines.length) return '';
+  return '<h2 id="how-we-treat-data-across-our-apps">How we treat data across our apps</h2>\n<ul>\n' + lines.map((l) => '<li>' + escapeHtml(l) + '</li>').join('\n') + '\n</ul>\n<p>Each app&#39;s own privacy policy has the details.</p>';
+}
+
+/** Permission table from app.json "permissions". The same table feeds the app's privacy policy. */
 function permissionsTable(app) {
   return '<div class="table-wrap"><table>\n<thead><tr><th scope="col">Permission</th><th scope="col">Android name</th><th scope="col">Why ' + escapeHtml(app.shortName) + ' needs it</th></tr></thead>\n<tbody>\n' +
     app.permissions.map((p) => '<tr><th scope="row">' + escapeHtml(p.label) + '</th><td>' + p.android.map((n) => '<code>' + escapeHtml(n) + '</code>').join(', ') + '</td><td>' + escapeHtml(p.reason) + '</td></tr>').join('\n') +
@@ -243,7 +282,7 @@ function applyComponents(html, ctx, where) {
   // The Markdown step escapes ">" to "&gt;", so accept both.
   return html.replace(/(?:<p>)?\{\{(?:>|&gt;)\s*(\w+)\s*\}\}(?:<\/p>)?/g, (m, name) => {
     if (!COMPONENTS[name]) { fail(where + ': unknown component ' + m); return ''; }
-    if (['playButton', 'factsTable', 'appPages', 'permissionsTable'].includes(name) && !ctx.app) { fail(where + ': ' + name + ' needs an app page'); return ''; }
+    if (['playButton', 'factsTable', 'appPages', 'permissionsTable', 'policyPermissionsTable', 'storedDataList'].includes(name) && !ctx.app) { fail(where + ': ' + name + ' needs an app page'); return ''; }
     return COMPONENTS[name](ctx);
   });
 }
@@ -499,20 +538,6 @@ function mdToHtml(md, ctx, where) {
   return applyComponents(html, ctx, where);
 }
 
-// A privacy policy page with "policyFor: <app slug>" must list every permission in app.json
-// with the same Android names and the same reason, word for word.
-for (const p of devPages.filter((x) => x.data.policyFor)) {
-  const app = apps.find((a) => a.slug === p.data.policyFor);
-  if (!app) { fail(p.rel + ': policyFor "' + p.data.policyFor + '" is not an app'); continue; }
-  const text = p.body.replace(/\s+/g, ' ');
-  for (const perm of app.permissions) {
-    if (!text.includes(perm.reason)) fail(p.rel + ': the reason for "' + perm.label + '" differs from app.json');
-    for (const n of perm.android) if (!text.includes('`' + n + '`')) fail(p.rel + ': permission ' + n + ' from app.json is missing');
-  }
-  for (const n of text.match(/`([A-Z_]{4,}|com\.android\.[\w.]+)`/g) || []) {
-    if (!app.permissions.some((perm) => perm.android.includes(n.slice(1, -1)))) fail(p.rel + ': permission ' + n + ' is not in app.json');
-  }
-}
 
 // Developer pages.
 const crumbHome = { name: 'Home', path: '/' };
@@ -560,14 +585,16 @@ for (const app of apps) {
     const relatedBox = related.length
       ? '<aside class="related" aria-labelledby="related-reading"><h2 id="related-reading">Related reading</h2>' + articleList(related) + '</aside>'
       : '';
+    const bodyHtml = mdToHtml(p, ctx, p.rel);
+    if (p.slug === 'privacy-policy') checkPolicyAgainstAppData(app, bodyHtml, p.rel);
     emit({
       path: p.path,
-      kind: p.kind,
+      kind: p.data.exactText ? 'legal' : p.kind, // exactText: legal text, writing rules only warn
       app,
       title: p.data.title,
       description: p.data.description,
       h1Html: escapeHtml(p.data.h1),
-      bodyHtml: mdToHtml(p, ctx, p.rel),
+      bodyHtml,
       dateModified: maxDate(p.data.dateModified, isHome || p.slug === 'facts' || p.slug === 'pricing' ? app.lastUpdated : null),
       crumbs: isHome ? appCrumbs : [...appCrumbs, { name: p.data.navLabel, path: p.path }],
       about: appRef(app),
@@ -576,6 +603,23 @@ for (const app of apps) {
       afterBody: relatedBox,
     });
   }
+}
+
+/**
+ * The app's privacy policy must show every permission in app.json with the same Android
+ * names and the same reason, word for word, and no permission that app.json does not list.
+ * (The table is generated from app.json, so this catches a hand-edited table.)
+ */
+function checkPolicyAgainstAppData(app, html, where) {
+  const text = textOf(html);
+  for (const perm of app.permissions) {
+    if (!text.includes(perm.reason)) fail(where + ': the reason for "' + perm.label + '" differs from app.json');
+    for (const n of perm.android) if (!html.includes('<code>' + n + '</code>')) fail(where + ': permission ' + n + ' from app.json is missing');
+  }
+  for (const m of html.matchAll(/<code>([A-Z_]{4,}|com\.android\.[\w.]+)<\/code>/g)) {
+    if (!app.permissions.some((perm) => perm.android.includes(m[1]))) fail(where + ': permission ' + m[1] + ' is not in app.json');
+  }
+  for (const d of app.storedData || []) if (!text.includes(d.label + ': ' + d.detail)) fail(where + ': stored data "' + d.label + '" differs from app.json');
 }
 
 // Articles.

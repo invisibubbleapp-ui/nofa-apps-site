@@ -145,7 +145,7 @@
     },
     {
       "label": "Data",
-      "value": "App data is stored in private storage on the phone. {{app.sdkClaim}} See https://nofa-apps.store/privacy-policy/"
+      "value": "App data is stored in private storage on the phone. {{app.sdkClaim}} See {{app.url}}privacy-policy/"
     },
     {
       "label": "Extension reason",
@@ -238,5 +238,37 @@
   "tapVsDrag": "A tap is different from a drag. Dragging the bubble moves it to the nearest screen edge.",
   "freeFirstDayOverrides": {
     "accessRule": "Invisibubble is free to install. New users currently get their first 24 hours free, with no code needed. After that, showing the floating bubble, and so the scroll timer, needs a 24-hour pass (Rs 5, can be bought again) or the lifetime unlock (Rs 100, paid once). Reminders and Settings open without paying."
+  },
+  "storedData": [
+    {
+      "label": "Theme",
+      "detail": "the theme you chose for the app."
+    },
+    {
+      "label": "Reminders",
+      "detail": "the short text and time of any same-day reminders you set."
+    },
+    {
+      "label": "Bubble settings",
+      "detail": "hide times, and what the bubble shows."
+    },
+    {
+      "label": "Access status",
+      "detail": "the signed purchase records from Google Play, whether a trial or the free day was used, and when the free day started and was last seen. It is used only to decide what the app shows you."
+    },
+    {
+      "label": "Saved free-day check",
+      "detail": "a copy of the last answer from the free-day check described under \"Network request\"."
+    },
+    {
+      "label": "Alarm record",
+      "detail": "a small record used to send the alert that a free day or 24-hour pass has ended."
+    }
+  ],
+  "practices": {
+    "noAccount": true,
+    "noTrackingSdks": true,
+    "noPersonalDataServer": true,
+    "noDataSale": true
   }
 }

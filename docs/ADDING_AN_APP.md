@@ -48,6 +48,10 @@ This is the **only** place the app's facts are typed. Pages pull them in with pl
 | `summary` | Two sentences: what the app is and what it does. Used in JSON-LD and llms.txt |
 | `offers` | Prices. Each has `key`, `name`, `label`, `description`, `price`, `currency`, `display` (for example `Rs 100`) |
 | `facts` | Rows of the fact-sheet table. `value` may use placeholders. `onlyIf` hides a row unless a field is true |
+| `permissions` | Every permission in the released app's merged manifest: `label`, `android` (list of Android names) and `reason` (one plain sentence or two). Feeds the safety page table and the privacy policy table |
+| `noPermissions` | One sentence naming sensitive permissions the app does not have (for example camera, microphone, location) |
+| `storedData` | Everything the app saves on the phone: `label` and `detail`. Feeds the privacy policy's "Data stored on your device" list |
+| `practices` | `noAccount`, `noTrackingSdks`, `noPersonalDataServer`, `noDataSale`: set `true` only if the app's own privacy policy says so. The `/privacy-policy/` overview shows a statement only when every app sets it to `true` |
 
 You can add any other field (for example `timerOptions`) and use it in pages as `{{app.timerOptions}}`.
 
@@ -82,6 +86,7 @@ The answer, in plain sentences.
 - Do not write a `# ` heading. The `h1` field is the only h1.
 - A section headed `## FAQ` with `### ` questions becomes FAQPage JSON-LD automatically, matching the visible text.
 - Pages named `index` and `facts` get the full SoftwareApplication JSON-LD.
+- Every app **must** have `pages/privacy-policy.md`. The build fails without it. See "The app's privacy policy" below.
 
 **Placeholders you can use in app pages:**
 
@@ -103,6 +108,20 @@ The answer, in plain sentences.
 - `<!-- TODO: something to confirm -->` is not published. The build lists it.
 - A `:::todo Title` ... `:::` box **is shown on the page** with a dashed border, and the build lists it. Use it only where the reader must see that something is missing.
 - `:::steps` ... `:::` around a numbered list shows it as step cards.
+
+### The app's privacy policy
+
+Create `apps/<slug>/pages/privacy-policy.md`. It is published at `/apps/<slug>/privacy-policy/`. Use that URL as the privacy policy URL in the Play Console. It is added to the app's menu, the footer, the sitemap, llms.txt and the `/privacy-policy/` overview automatically.
+
+Start from `apps/invisibubble/pages/privacy-policy.md` and fill in, from the real app (not from memory):
+
+1. **Data practices:** what the app stores on the phone (`storedData` in `app.json`), backups, every network request and what it sends, purchases, what you do not do, children, retention and deletion.
+2. **Permissions:** every permission in the merged release manifest, including ones added by libraries, in `permissions` in `app.json`. Put `{{> policyPermissionsTable}}` in the policy and `{{> permissionsTable}}` on the safety page; both come from the same data.
+3. **Contact:** `contactEmail` in `app.json`, shown with `{{app.contactEmail}}`.
+
+Front matter: `navLabel: Privacy Policy`, `exactText: true` (legal text: the writing-rule checks only warn) and `dateModified`. **The "Last updated" date is manual:** change `dateModified` in this file whenever the policy text changes. It does not change when `app.json` changes.
+
+The build fails if the policy's permission table or stored-data list does not match `app.json` word for word, or names a permission that `app.json` does not list.
 
 ### 4. Build and check
 

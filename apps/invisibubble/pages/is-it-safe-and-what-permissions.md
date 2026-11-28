@@ -4,7 +4,7 @@ h1: "Is Invisibubble safe, and what permissions does it need?"
 description: "Invisibubble needs Android's Display over other apps permission to show its bubble and time's up screen on top of other apps. Here is every permission and why."
 navLabel: Safety and permissions
 order: 6
-dateModified: 2026-11-21
+dateModified: 2026-11-28
 ---
 
 Invisibubble's main permission is Android's "Display over other apps", because the bubble and the time's up screen must appear on top of the app you are using. Every other permission it uses is listed below with its reason, and it has no camera, microphone, location, contacts, storage or SMS permissions.
@@ -36,7 +36,7 @@ The steps and names can differ by phone maker. If you turn the permission off, t
 
 ## Full permission list
 
-These are all the permissions in the released app. The same list is in the [Invisibubble privacy policy](/privacy-policy/).
+These are all the permissions in the released app. The same list is in the [Invisibubble privacy policy]({{url:privacy-policy}}).
 
 {{> permissionsTable}}
 
@@ -49,7 +49,7 @@ Invisibubble makes one network request of its own: a plain HTTPS request for a s
 
 ## Your data
 
-According to the [privacy policy](/privacy-policy/):
+According to the [Invisibubble privacy policy]({{url:privacy-policy}}):
 
 - There is no account and no sign-in.
 - Everything the app saves is stored in the app's private storage on your phone. If Android backup is on, only one small file with three access fields can be backed up to your own Google account.
@@ -96,4 +96,4 @@ No. Invisibubble is a timer you set yourself. It is not a medical or health prod
 
 ### Where can I read the privacy policy?
 
-The privacy policy is at [nofa-apps.store/privacy-policy](/privacy-policy/).
+The Invisibubble privacy policy is at [nofa-apps.store/apps/invisibubble/privacy-policy]({{url:privacy-policy}}).
